@@ -1,14 +1,17 @@
 package org.meal.dao;
 
+import org.meal.model.ExistingMeal;
 import org.meal.model.Meal;
-
-import java.util.Optional;
+import org.meal.model.MissingMeal;
 
 public class MealDAOImpl implements MealDAO{
+
+    // if not Meal has found, an especial Meal (MissingMeal) is returned. This way we
+    // try not to return null never
     @Override
-    public Optional<Meal> getById(String id) {
+    public Meal getById(String id) {
         return id.equals("paco")
-                ? Optional.of(new Meal("paco","Chicken", 12D))
-                : Optional.empty();
+                ? new ExistingMeal("paco","Chicken", 12D)
+                : new MissingMeal();
     }
 }
